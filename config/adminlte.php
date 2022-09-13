@@ -330,7 +330,7 @@ return [
                 [
                     'text' => 'Proveedores',
                     'icon'    => 'fas fa-fw fa-user-tie',
-                    'url'  => '#',
+                    'url'  => '/admin/providers',
                 ],
 
             ],
@@ -380,7 +380,7 @@ return [
         ],
 
 
-        
+
     ],
 
     /*

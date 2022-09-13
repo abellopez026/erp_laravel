@@ -3,11 +3,10 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Nuevo Cliente</h1>
+    <h1>Nuevo Proveedor</h1>
 @stop
 
 @section('content')
-
 
     <div class="row">
 
@@ -28,7 +27,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form class="form-horizontal" action="{{ route('customers.store') }}" method="POST">
+                    <form class="form-horizontal" action="{{ route('providers.store') }}" method="POST">
                         @csrf
                         <div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
@@ -60,11 +59,17 @@
                                 <input type="text" class="form-control" name="phone" id="phone"" value="{{old('phone')}}">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="inputExperience" class="col-sm-2 col-form-label">Nombre empresa</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="business_name" id="business_name"" value="{{old('business_name')}}">
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <div class="offset-sm-2 col-sm-10">
                                 <button type="submit" class="btn btn-outline-primary">Guardar</button>
-                                <a href="{{ route('customers.index') }}" class="btn btn-outline-danger">Volver</a>
+                                <a href="{{ route('providers.index') }}" class="btn btn-outline-danger">Volver</a>
                             </div>
                         </div>
                     </form>
