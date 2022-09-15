@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Clientes</h1>
+    <h1>Productos</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
         <div class="col-12">
             @if (Session::has('save'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        El cliente ha sido guardado
+                        El producto ha sido guardado
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -20,7 +20,7 @@
             @endif
             @if (Session::has('update'))
                     <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        El cliente ha sido actualizado
+                        El producto ha sido actualizado
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -28,7 +28,7 @@
             @endif
             @if (Session::has('destroy'))
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        El cliente ha sido eliminado
+                        El producto ha sido eliminado
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -37,8 +37,8 @@
             <div class="card">
                 <div class="row px-2 my-3">
                     <div class="col">
-                        <a href="{{ route('customers.create') }}" class="btn btn-outline-primary">
-                            Nuevo Cliente
+                        <a href="{{ route('products.create') }}" class="btn btn-outline-primary">
+                            Nuevo producto
                         </a>
                     </div>
                 </div>
@@ -48,28 +48,26 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Correo</th>
-                                <th>Direccion</th>
-                                <th>Telefono</th>
+                                <th>Descripcion</th>
+                                <th>Precio</th>
+                                <th>Categoria</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($customers as $customer)
+                            @foreach ($products as $product)
                                 <tr>
-                                    <td> {{ $customer->name }}</td>
-                                    <td> {{ $customer->lastname }}</td>
-                                    <td> {{ $customer->email }}</td>
-                                    <td> {{ $customer->address }}</td>
-                                    <td> {{ $customer->phone }}</td>
+                                    <td> {{ $product->name }}</td>
+                                    <td> {{ $product->description }}</td>
+                                    <td> {{ $product->price }}</td>
+                                    <td> {{ $product->category->name }}</td>
                                     <td>
-                                        <form method="POST" action="{{ route('customers.destroy', $customer) }}">
+                                        <form method="POST" action="{{ route('products.destroy', $product) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{ route('customers.show', $customer) }}"
+                                            <a href="{{ route('products.edit', $product) }}"
                                                 class="btn btn-outline-success btn-rounded mb-1"><i
-                                                    class="fa-regular fa-eye"></i></a>
+                                                    class="fa-solid fa-pen"></i></a>
                                             <button type="submit" class="btn btn-outline-danger btn-rounded mb-1"><i
                                                     class="fa-solid fa-trash"></i></button>
                                         </form>
@@ -84,6 +82,8 @@
             <!-- /.card -->
         </div>
     </div>
+
+
 
 @stop
 

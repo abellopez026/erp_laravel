@@ -342,9 +342,14 @@ return [
             'icon'    => 'fas fa-fw fa-clipboard-list',
             'submenu' => [
                 [
+                    'text' => 'Categorias',
+                    'icon'    => 'fas fa-fw fa-tag',
+                    'url'  => '/admin/categories',
+                ],
+                [
                     'text' => 'Productos',
                     'icon'    => 'fas fa-fw fa-list',
-                    'url'  => '#',
+                    'url'  => '/admin/products',
                 ],
 
             ],
