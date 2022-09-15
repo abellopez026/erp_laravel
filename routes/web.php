@@ -21,4 +21,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('', [HomeController::class, "index"])->name('admin');
+
