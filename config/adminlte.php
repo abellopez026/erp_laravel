@@ -367,7 +367,7 @@ return [
                 [
                     'text' => 'Ventas',
                     'icon'    => 'fas fa-fw fa-cart-plus',
-                    'url'  => '#',
+                    'url'  => '/admin/sales',
                 ],
             ],
         ],

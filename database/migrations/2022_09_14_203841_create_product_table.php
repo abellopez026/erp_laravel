@@ -21,9 +21,10 @@ return new class extends Migration
             $table->string('height');
             $table->string('width');
             $table->string('weight');
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
 
-            $table->unsignedBigInteger('category_id');
+
 
             $table->foreign('category_id')->references('id')->on('category');
 
