@@ -17,7 +17,7 @@
                         <div class="form-group row">
                             <label for="inputName" class="col col-form-label">No</label>
                             <div class="col-11">
-                                <input type="text" class="form-control" name="no" id="no">
+                                <input type="text" class="form-control" name="invoice_no" id="invoice_no">
                             </div>
                         </div>
 
@@ -126,7 +126,7 @@
                 contentType: 'application/json',
                 data: json,
                 success: function(response) {
-                    
+                    window.location.href="{{route("sales.index")}}";
                 },
                 error: function(error) {
                     console.log("ERROR EN EL ENVIO");

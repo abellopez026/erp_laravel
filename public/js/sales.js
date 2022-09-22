@@ -21,6 +21,7 @@ save.addEventListener("click", saveSale);
 // Funcion que añade un producto a la tabla HTML
 function add() {
 
+    var id = product.options[product.selectedIndex].value;
     var nombre = product.options[product.selectedIndex].text;
     var cantidad = parseFloat(document.querySelector('#cantity').value);
     var precio = parseFloat(document.querySelector('#price').value);
@@ -29,12 +30,7 @@ function add() {
 
     totalFactura += total;
 
-
-    //Variable que asigna el id a una fila, para poder eliminarla
-    var id_row = 'row' + cant;
-
-
-    var fila = '<tr id=' + id_row + '><td id=' + cant + '>' + cant + '</td><td>' + nombre + '</td><td>' + cantidad + ' </td> <td> ' + precio + '</td><td> ' + total + '</td> <td> <a href="#" class="btn btn-outline-danger" onclick="deleteRow(' + cant + ')";><i class="fa-solid fa-trash"></i></a> </td></tr>';
+    var fila = '<tr id=' + id + '><td id=' + cant + '>' + cant + '</td><td>' + nombre + '</td><td>' + cantidad + ' </td> <td> ' + precio + '</td><td> ' + total + '</td> <td> <a href="#" class="btn btn-outline-danger" onclick="deleteRow(' + cant + ')";><i class="fa-solid fa-trash"></i></a> </td></tr>';
 
     //Inserta la fila en la tabla
     $("#table").append(fila);
@@ -62,14 +58,14 @@ function saveSale() {
     var arrayOfThisRow = [];
 
     //Obteniendo datos necesarios para la tabla de ventas (NO detalle de venta)
-    var noOrden = document.getElementById("no").text;
+    var invoice = document.querySelector('#invoice_no').value;
     var idCliente = customer.options[customer.selectedIndex].value;
     var status = "Pendiente";
     var totalF = totalFactura;
 
     // Array con la informacion para la venta (Sale)
     sale.push({
-        invoice_no: 1234,
+        invoice_no: invoice,
         customer_id: idCliente,
         status: status,
         total: totalF
@@ -78,13 +74,13 @@ function saveSale() {
     // Recorre cada td de la tabla y guarda la info en un array (detailSale)
     $("#tbody tr").each(function() {
 
-        var name = $(this).find('td:eq(1)').text();
+        var idP = $(this).attr('id');
         var cantity = $(this).find('td:eq(2)').text();
         var price = $(this).find('td:eq(3)').text();
         var total = $(this).find('td:eq(4)').text();
 
         arrayOfThisRow.push({
-            name: name,
+            product_id: idP,
             cantity: cantity,
             price: price,
             total: total
@@ -98,13 +94,13 @@ function saveSale() {
         "sale_detail": arrayOfThisRow
     }
 
-
     var json = JSON.stringify(datos);
 
+
     ajax(json);
+
+
 }
-
-
 
 /* function deleteRow(row) {
     $("#row" + row).remove;
