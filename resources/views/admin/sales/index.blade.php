@@ -65,9 +65,9 @@
                                         <form method="POST" action="{{ route('sales.destroy', $sale) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{ route('sales.edit', $sale) }}"
+                                            <a href="{{ route('sales.show', $sale) }}"
                                                 class="btn btn-outline-success btn-rounded mb-1"><i
-                                                    class="fa-solid fa-pen"></i></a>
+                                                    class="fa-solid fa-eye"></i></a>
                                             <button type="submit" class="btn btn-outline-danger btn-rounded mb-1"><i
                                                     class="fa-solid fa-trash"></i></button>
                                         </form>

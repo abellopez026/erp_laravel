@@ -88,9 +88,11 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Sale $sale)
     {
-        //
+        $sale = $this->saleRepository->find($sale);
+
+        return view("admin.sales.show")->with("sale", $sale);
     }
 
     /**
