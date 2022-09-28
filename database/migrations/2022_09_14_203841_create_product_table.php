@@ -18,13 +18,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->decimal('price', $precision = 8, $scale = 2);
-            $table->string('height');
-            $table->string('width');
-            $table->string('weight');
+            $table->string('height')->nullable();
+            $table->string('width')->nullable();
+            $table->string('weight')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
-
-
 
             $table->foreign('category_id')->references('id')->on('category');
 

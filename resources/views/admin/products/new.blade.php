@@ -44,26 +44,26 @@
                         <div class="form-group row">
                             <label for="inputExperience" class="col-sm-2 col-form-label">Precio</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="price" id="price"" value="{{old('phone')}}" placeholder="Precio del producto">
+                                <input type="number" step="0.01" class="form-control" name="price" id="price"" value="{{old('phone')}}" placeholder="Precio del producto">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputExperience" class="col-sm-2 col-form-label">Dimensiones</label>
                             <div class="col">
-                                <input type="number" class="form-control" name="height" id="height"" value="{{old('phone')}}" placeholder="Altura">
+                                <input type="number" step="0.01" class="form-control" name="height" id="height"" value="{{old('phone')}}" placeholder="Altura">
                             </div>
                             <div class="col">
-                                <input type="number" class="form-control" name="width" id="width"" value="{{old('phone')}}" placeholder="Anchura">
+                                <input type="number" step="0.01" class="form-control" name="width" id="width"" value="{{old('phone')}}" placeholder="Anchura">
                             </div>
                             <div class="col">
-                                <input type="number" class="form-control" name="weight" id="weight"" value="{{old('phone')}}" placeholder="Peso">
+                                <input type="number" step="0.01" class="form-control" name="weight" id="weight"" value="{{old('phone')}}" placeholder="Peso">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputExperience" class="col-sm-2 col-form-label">Categoria</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="category_id" id="category_id" aria-label="Default select example">
-                                    <option selected>Seleccione una categoria</option>
+                                    <option value="0" selected>Seleccione una categoria</option>
                                     @foreach ($categories as $cat)
                                         <option value="{{$cat->id}}">{{$cat->name}}</option>
                                     @endforeach
@@ -87,11 +87,9 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')
-    <script>
-        console.log('Hi!');
-    </script>
+
 @stop

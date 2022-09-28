@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
+use App\Http\Requests\ProductFormRequest;
 use Session;
 
 class ProductController extends Controller
@@ -52,7 +53,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductFormRequest $request)
     {
 
         $product = new Product($request->all());
@@ -101,7 +102,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductFormRequest $request, Product $product)
     {
         $product = $this->productRepository->update($product, $request->all());
 
