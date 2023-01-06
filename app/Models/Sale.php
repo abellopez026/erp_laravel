@@ -11,7 +11,7 @@ class Sale extends Model
 
     protected $table = 'sale';
 
-    protected $fillable = ['invoice_no', 'customer_id', 'status', 'total', 'date'];
+    protected $fillable = ['invoice_no', 'customer_id', 'isCanceled', 'total', 'date'];
 
     public function customer() {
 
@@ -20,7 +20,7 @@ class Sale extends Model
     }
 
     public function saledetail() {
-        
+
         return $this->hasMany(SaleDetail::class);
     }
 

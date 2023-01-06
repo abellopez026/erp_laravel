@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('invoice_no');
             $table->unsignedBigInteger('customer_id');
-            $table->string('status');
-            $table->string('total');
-            $table->string('date');
+            $table->boolean('isCanceled');
+            $table->float('total');
+            $table->dateTime('date');
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customer');

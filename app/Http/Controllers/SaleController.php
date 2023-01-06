@@ -65,7 +65,9 @@ class SaleController extends Controller
     public function store(Request $request)
     {
 
-        $sale = new Sale($request->sale[0]);
+        return response()-json($request, 200); 
+
+        /* $sale = new Sale($request->sale[0]);
         $sale = $this->saleRepository->save($sale);
 
         $details = array_filter($request->sale_detail);
@@ -78,7 +80,7 @@ class SaleController extends Controller
 
             $saledetail = $this->saledetailRepository->save($saledetail);
 
-        }
+        } */
 
     }
 

@@ -8,101 +8,145 @@
 @stop
 
 @section('content')
+
     <div class="container">
-        <div class="card">
-            <div class="row">
-                <!-- Columna principal para agregar productos-->
-                <div class="col px-4 py-2">
-                    <div>
-                        <div class="form-group row">
-                            <label for="inputName" class="col col-form-label">No</label>
-                            <div class="col-11">
-                                <input type="text" class="form-control" name="invoice_no" id="invoice_no">
-                            </div>
-                        </div>
-
-                        <div class="row g-3">
-                            <div class="col-6">
-                                <label for="exampleDataList" class="form-label">Seleccione el cliente</label>
-                                <select id="idCustomer" class="form-control" aria-label="Default select example">
-                                    <option value="0" selected>Seleccione...</option>
-                                    @foreach ($customers as $customer)
-                                        <option value="{{ $customer->id }}">{{ $customer->name }} {{ $customer->lastname }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-6">
-                                <label for="exampleDataList" class="form-label">Seleccione el vendedor</label>
-                                <input type="text" class="form-control" id="seller" name="seller"
-                                    value="{{ auth()->user()->name }}" disabled>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <label for="exampleDataList" class="form-label">Seleccione el producto</label>
-                                <select id="idProduct" onchange="" class="form-control"
-                                    aria-label="Default select example">
-                                    <option value="0" selected>Seleccione...</option>
-                                    @foreach ($products as $product)
-                                        <option data-price="{{ $product->price }}" value="{{ $product->id }}">
-                                            {{ $product->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputCantity" class="form-label">Cantidad</label>
-                                <input type="number" class="form-control" id="cantity">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputPrice" class="form-label">Precio $</label>
-                                <input type="number" class="form-control" id="price">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputETotal" class="form-label">Total $</label>
-                                <input type="number" class="form-control" id="total" disabled>
-                            </div>
-
-                            <div class="col-12 my-3">
-                                <button type="button" id="addProduct" class="btn btn-outline-primary">Agregar</button>
-                                <button type="button" id="saveSale" class="btn btn-primary">Registrar Venta</button>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <table id="table" class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Cantidad</th>
-                                            <th scope="col">Precio Unitario</th>
-                                            <th>Total</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbody">
-
-                                    </tbody>
-                                    <tfoot style="text-align: right">
-                                        <tr>
-                                            <td colspan="5">Total: </td>
-                                            <td id="totalFinal">$0.00</td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-circle-info"></i> Informacion
+                </div>
+                <div class="row px-4 pt-2 pb-3">
+                    <div class="col-4">
+                        <label for="formFile" class="form-label">No. Recibo</label>
+                        <input class="form-control form-control-sm" type="number" id="invoice_no" >
                     </div>
+                    <div class="col-4">
+                        <label for="formFile" class="form-label">Fecha </label>
+                        <input class="form-control form-control-sm" type="datetime-local" id="date" >
+                    </div>
+                    <div class="col-4">
+                        <label for="formFile" class="form-label">Estado</label>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="isCanceled">
+                            <label class="custom-control-label" for="isCanceled"> Cancelado </label>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-user"></i> Datos del Cliente
+                </div>
+                <div class="row px-4 pt-2 pb-3">
+                    <div class="col-4">
+                        <label for="formFile" class="form-label">Nombre</label>
+                        <select class="form-control form-control-sm js-customers" id="customers" onchange="setDataCustomer(event)">
+                            <option data-address="" data-phone="" selected>Seleccione un cliente...</option>
+                            @foreach ($customers as $c)
+                            <option value="{{$c->id}}" data-address="{{$c->address}}" data-phone="{{$c->phone}}">{{$c->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label for="formFile" class="form-label">Direccion</label>
+                        <input class="form-control form-control-sm" type="text" id="address" disabled>
+                    </div>
+                    <div class="col-4">
+                        <label for="formFile" class="form-label">Telefono</label>
+                        <input class="form-control form-control-sm" type="text" id="phone" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-tag"></i> Agregar producto
+                </div>
+                <div class="row px-4 pt-2 pb-3">
+                    <div class="col-4">
+                        <label for="formFile" class="form-label">Producto</label>
+                        <select class="form-control form-control-sm js-customers" id="products" onchange="setDataProduct(event)">
+                            <option data-price="0.00" selected>Seleccione un producto...</option>
+                            @foreach ($products as $p)
+                            <option value="{{$p->id}}" data-price="{{$p->price}}">{{$p->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <label for="formFile" class="form-label">Cant.</label>
+                        <input class="form-control form-control-sm" type="text" id="cantity">
+                    </div>
+                    <div class="col-2">
+                        <label for="formFile" class="form-label">Precio</label>
+                        <input class="form-control form-control-sm" type="text" id="price">
+                    </div>
+                    <div class="col-2">
+                        <label for="formFile" class="form-label">Stock</label>
+                        <input class="form-control form-control-sm" type="text" disabled>
+                    </div>
+                    <div class="col-2">
+                        <br>
+                        <button type="button " class="btn btn-primary btn-sm" id="add"> <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-sharp fa-solid fa-print"></i> Detalle de compra
+                </div>
+                <div class="container px-4 py-4">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6" style="text-align: right"> <p id="total"> <b> Total: $ 0.00  </b> </p> </td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
 
             </div>
         </div>
-
     </div>
+
+
+    <div class="container">
+        <div class="col-12">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-primary" id="save">Registrar venta</button>
+                    <button type="button" class="btn btn-outline-danger mx-2" id="cancel">Cancelar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 @stop
@@ -111,32 +155,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @stop
 
 @section('js')
     <script src="{{ asset('js/sales.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <script>
-        function ajax(json) {
+    <script type="text/javascript">
+        $.ajaxSetup({
+                headers: {
+                    'Content-Type':'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+        });
+
+        function enviar() {
+            
             $.ajax({
                 type: 'POST',
                 url: '{{ route('sales.store') }}',
+                dataType: 'json',
                 contentType: 'application/json',
-                data: json,
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    data: JSON.stringify("test")
+                },
                 success: function(response) {
-                    window.location.href="{{route("sales.index")}}";
+                    console.log("DATOS ENVIADOS");
                 },
                 error: function(error) {
                     console.log("ERROR EN EL ENVIO");
                 }
             });
         }
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
     </script>
 @stop

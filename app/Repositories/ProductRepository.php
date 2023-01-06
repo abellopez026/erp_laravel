@@ -5,10 +5,10 @@ namespace App\Repositories;
 use App\Models\Product;
 
 
-class productRepository {
+class ProductRepository {
 
     public function __construct() {
-        $this->model = new product();
+        $this->model = new Product();
     }
 
 
@@ -29,7 +29,7 @@ class productRepository {
 
     public function edit($id) {
 
-        $product = product::find($id);
+        $product = Product::find($id);
 
         return $product;
     }
